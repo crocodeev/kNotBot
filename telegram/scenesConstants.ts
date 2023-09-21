@@ -1,1 +1,1 @@
-export const CREATE_EXPENCE: string = "CREATE_EXPENCE"
+export const ADD_EXPENCE: string = "ADD_EXPENCE"
