@@ -1,0 +1,293 @@
+{
+  "object": "list",
+  "results": [
+    {
+      "object": "page",
+      "id": "022edb5c-d0cd-47c5-8b68-0259982bec5a",
+      "created_time": "2023-09-08T20:11:00.000Z",
+      "last_edited_time": "2023-09-19T10:30:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43c734f6-c9ec-434d-99ef-56effca6bec8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43c734f6-c9ec-434d-99ef-56effca6bec8"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "df853c5a-fcc1-4e4b-8687-9843270f1d2f"
+      },
+      "archived": false,
+      "properties": {
+        "Сurrency": {
+          "id": "%3F%3Ezg",
+          "type": "select",
+          "select": { "id": "q~tB", "name": "RUB", "color": "gray" }
+        },
+        "Emoji": {
+          "id": "WLyk",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": { "content": "🟡", "link": null },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "🟡",
+              "href": null
+            }
+          ]
+        },
+        "Amount": { "id": "tWj%7D", "type": "number", "numb er": 30000 },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": { "content": "Tinkoff", "link": null },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Tinkoff",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://www.notion.so/Tinkoff-022edb5cd0cd47c58b680259982bec5a",
+      "public_url": null
+    },
+    {
+      "object": "page",
+      "id": "11291ed7-a5a0-46a5-b739-780ce3ca8172",
+      "created_time": "2023-09-08T20:05:00.000Z",
+      "last_edited_time": "2023-09-19T10:30:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43c734f6-c9ec-434d-99ef-56effca6bec8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43c734f6-c9ec-434d-99ef-56effca6bec8"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "df853c5a-fcc1-4e4b-8687-9843270f1d2f"
+      },
+      "archived": false,
+      "properties": {
+        "Сurrency": {
+          "id": "%3F%3Ezg",
+          "type": "select",
+          "select": { "id": "im:`", "name": "USD", "color": "default" }
+        },
+        "Emoji": {
+          "id": "WLyk",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": { "content": "💵", "link": null },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "💵",
+              "href": null
+            }
+          ]
+        },
+        "Amount": { "id": "tWj%7D", "type": "number", "number": 1000 },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": { "content": "Dollars Cash", "link": null },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Dollars Cash",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://www.notion.so/Dollars-Cash-11291ed7a5a046a5b739780ce3ca8172",
+      "public_url": null
+    },
+    {
+      "object": "page",
+      "id": "533a9cce-0af6-4041-a3f2-b9bc3d038a1c",
+      "created_time": "2023-09-08T20:05:00.000Z",
+      "last_edited_time": "2023-09-19T10:30:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43c734f6-c9ec-434d-99ef-56effca6bec8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43c734f6-c9ec-434d-99ef-56effca6bec8"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "df853c5a-fcc1-4e4b-8687-9843270f1d2f"
+      },
+      "archived": false,
+      "properties": {
+        "Сurrency": {
+          "id": "%3F%3Ezg",
+          "type": "select",
+          "select": { "id": "q~tB", "name": "RUB", "color": "gray" }
+        },
+        "Emoji": {
+          "id": "WLyk",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": { "content": "🟢", "link": null },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "🟢",
+              "href": null
+            }
+          ]
+        },
+        "Amount": { "id": "tWj%7D", "type": "number", "number": 25000 },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": { "content": "Sberbank", "link": null },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Sberbank",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://www.notion.so/Sberbank-533a9cce0af64041a3f2b9bc3d038a1c",
+      "public_url": null
+    },
+    {
+      "object": "page",
+      "id": "7ccf8116-9a81-4022-9478-19e084351f80",
+      "created_time": "2023-09-08T20:05:00.000Z",
+      "last_edited_time": "2023-09-19T10:30:00.000Z",
+      "created_by": {
+        "object": "user",
+        "id": "43c734f6-c9ec-434d-99ef-56effca6bec8"
+      },
+      "last_edited_by": {
+        "object": "user",
+        "id": "43c734f6-c9ec-434d-99ef-56effca6bec8"
+      },
+      "cover": null,
+      "icon": null,
+      "parent": {
+        "type": "database_id",
+        "database_id": "df853c5a-fcc1-4e4b-8687-9843270f1d2f"
+      },
+      "archived": false,
+      "properties": {
+        "Сurrency": {
+          "id": "%3F%3Ezg",
+          "type": "select",
+          "select": { "id": "KLJh", "name": "EURO", "color": "pink" }
+        },
+        "Emoji": {
+          "id": "WLyk",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": { "content": "🇪🇺", "link": null },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "🇪🇺",
+              "href": null
+            }
+          ]
+        },
+        "Amount": { "id": "tWj%7D", "type": "number", "number": 100 },
+        "Name": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": { "content": "Euro Cash", "link": null },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Euro Cash",
+              "href": null
+            }
+          ]
+        }
+      },
+      "url": "https://www.notion.so/Euro-Cash-7ccf81169a814022947819e084351f80",
+      "public_url": null
+    }
+  ],
+  "next_cursor": null,
+  "has_more": false,
+  "type": "page_or_database",
+  "page_or_database": {}
+}
