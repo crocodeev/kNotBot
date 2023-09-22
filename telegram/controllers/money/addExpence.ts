@@ -10,6 +10,21 @@ import createInlineKeyboard from '../../../utils/createInlineKeyboard';
 
 const databases: TDatabasesIds = loadJsonFileSync('./settings/databases.json')
 
+
+const cbCategoryHandler = new Composer<CustomContext>()
+
+cbCategoryHandler.on('callback_query', (ctx) => {
+    ctx.scene.session.expence.categoryID = ctx.callbackQuery.data
+    ctx.wizard.next()
+})
+
+const cbAccountHandler = new Composer<CustomContext>()
+
+cbAccountHandler.on('callback_query', (ctx) => {
+    ctx.scene.session.expence.accountID = ctx.callbackQuery.data
+    ctx.wizard.next()
+})5
+
 const addExpence = new Scenes.WizardScene<CustomContext>(
     ADD_EXPENCE,
     //name request
@@ -18,7 +33,7 @@ const addExpence = new Scenes.WizardScene<CustomContext>(
         ctx.scene.session.expence.amount = parseFloat(ctx.message.text)
         await ctx.reply("Name it, please")
         ctx.scene.session.expence.name = ctx.message.text
-        ctx.wizard.next()
+        return ctx.wizard.next()
     },
     //request Category
     async (ctx) => {
@@ -27,24 +42,36 @@ const addExpence = new Scenes.WizardScene<CustomContext>(
         const kb = createInlineKeyboard(categories, 2)
 
         await ctx.reply("Select category...", {
-            reply_markup: {
+            reply_markup: { 
                 inline_keyboard: kb
             }
         })
 
-        console.log(ctx.message);
-
-        ctx.wizard.next()
+        return ctx.wizard.next()
     },
+    cbCategoryHandler,
     //request Account
     async (ctx) => {
-        
-        ctx.wizard.next()
+        const accounts = await getCategories(databases.accounts)
+
+        const kb = createInlineKeyboard(accounts, 2)
+
+        await ctx.reply("Select category...", {
+            reply_markup: { 
+                inline_keyboard: kb
+            }
+        })
+
+        return ctx.wizard.next()
     },
+    cbAccountHandler,
     //create Expence
     async (ctx) => {
+        console.log("create expence");
         
-        ctx.scene.leave()
+        await createExpence(ctx.scene.session.expence as TExpenceObject, databases.expences)
+        await ctx.reply("Expence successfully added")
+        return await ctx.scene.leave()
     }  
 )
 
