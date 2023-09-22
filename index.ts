@@ -1,3 +1,3 @@
 import bot from "./telegram/bot";
 
-bot.launch()
+bot.start()

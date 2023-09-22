@@ -23,6 +23,7 @@
   "dependencies": {
     "@notionhq/client": "^2.2.13",
     "dotenv": "^16.3.1",
+    "grammy": "^1.18.3",
     "load-json-file": "^7.0.1",
     "telegraf": "^4.13.1"
   }
