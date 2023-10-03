@@ -1,8 +1,6 @@
 import { ADD_EXPENCE } from '../../scenesConstants';
-import { CustomContext } from '../../customContextType';
-import { Scenes, Context, Composer, Markup } from "telegraf";
+import { CustomContext, CustomConversation } from '../../customContextType';
 import { getCategories, createExpence, retrieveDatabase } from '../../../controllers/money';
-import { InlineKeyboardButton, InlineKeyboardMarkup, Message, Update } from 'telegraf/typings/core/types/typegram';
 import { loadJsonFileSync } from "load-json-file";
 import { TDatabasesIds } from "../../../types/config";
 import { TExpenceObject } from "../../../types/notion";
@@ -10,69 +8,52 @@ import createInlineKeyboard from '../../../utils/createInlineKeyboard';
 
 const databases: TDatabasesIds = loadJsonFileSync('./settings/databases.json')
 
+const addExpence = async (conversation: CustomConversation, ctx: CustomContext) => {
 
-const cbCategoryHandler = new Composer<CustomContext>()
+    if(ctx.message?.text === undefined) return
 
-cbCategoryHandler.on('callback_query', (ctx) => {
-    ctx.scene.session.expence.categoryID = ctx.callbackQuery.data
-    ctx.wizard.next()
-})
+    ctx.expence = {}
+    ctx.expence.amount = parseInt(ctx.message.text)
 
-const cbAccountHandler = new Composer<CustomContext>()
+    //request name
+    await ctx.reply("Name it, please...")
 
-cbAccountHandler.on('callback_query', (ctx) => {
-    ctx.scene.session.expence.accountID = ctx.callbackQuery.data
-    ctx.wizard.next()
-})5
+    let data = await conversation.wait()
+    ctx.expence.name = data.message?.text
+    
+    //request category
+    const categories = await getCategories(databases.categories)
+    let kb = createInlineKeyboard(categories, 2)
 
-const addExpence = new Scenes.WizardScene<CustomContext>(
-    ADD_EXPENCE,
-    //name request
-    async (ctx) => {
-        ctx.scene.session.expence = {}
-        ctx.scene.session.expence.amount = parseFloat(ctx.message.text)
-        await ctx.reply("Name it, please")
-        ctx.scene.session.expence.name = ctx.message.text
-        return ctx.wizard.next()
-    },
-    //request Category
-    async (ctx) => {
-        const categories = await getCategories(databases.categories)
+    await ctx.reply('Choose category', {
+        reply_markup: {
+            inline_keyboard: kb
+        }
+    })
 
-        const kb = createInlineKeyboard(categories, 2)
+    data = await conversation.wait()
+    ctx.expence.categoryID = data.callbackQuery?.data
+    console.log(ctx.expence);
+    
+    //request account
 
-        await ctx.reply("Select category...", {
-            reply_markup: { 
-                inline_keyboard: kb
-            }
-        })
+    const accounts = await getCategories(databases.accounts)
+    kb = createInlineKeyboard(accounts, 2)
+    await ctx.reply('Choose account', {
+        reply_markup: {
+            inline_keyboard: kb
+        }
+    })
 
-        return ctx.wizard.next()
-    },
-    cbCategoryHandler,
-    //request Account
-    async (ctx) => {
-        const accounts = await getCategories(databases.accounts)
-
-        const kb = createInlineKeyboard(accounts, 2)
-
-        await ctx.reply("Select category...", {
-            reply_markup: { 
-                inline_keyboard: kb
-            }
-        })
-
-        return ctx.wizard.next()
-    },
-    cbAccountHandler,
-    //create Expence
-    async (ctx) => {
-        console.log("create expence");
-        
-        await createExpence(ctx.scene.session.expence as TExpenceObject, databases.expences)
-        await ctx.reply("Expence successfully added")
-        return await ctx.scene.leave()
-    }  
-)
-
+    data = await conversation.wait()
+    ctx.expence.accountID = data.callbackQuery?.data
+    
+    //add expence to notion
+    console.log(ctx.expence);
+    
+    await createExpence(ctx.expence as TExpenceObject, databases.expences) //type protection?
+    await ctx.reply('Succefully added')
+    return
+}
+ 
 export { addExpence }
