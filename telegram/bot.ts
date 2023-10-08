@@ -1,12 +1,12 @@
 import { config } from 'dotenv';
-import { Bot } from 'grammy';
+import { Bot, HttpError, GrammyError } from 'grammy';
 import { session } from '@grammyjs/conversations/out/deps.node';
 import {
     createConversation,
     conversations
   } from "@grammyjs/conversations";
 import { CustomContext } from './customContextType';
-import { addExpence } from './controllers/money/addExpence';
+import { expence } from './controllers/money/expence';
 import { ADD_EXPENCE } from './scenesConstants';
 
 
@@ -30,11 +30,24 @@ bot.use(session({
 
 bot.use(conversations())
 
-bot.use(createConversation(addExpence, ADD_EXPENCE))
+bot.use(createConversation(expence, ADD_EXPENCE))
 
 bot.hears(/^[+-]?\d+(\.\d+)?$/, async (ctx) => {
     
     await ctx.conversation.enter(ADD_EXPENCE)
 })
+
+bot.catch((err) => {
+  const ctx = err.ctx;
+  console.error(`Error while handling update ${ctx.update.update_id}:`);
+  const e = err.error;
+  if (e instanceof GrammyError) {
+    console.error("Error in request:", e.description);
+  } else if (e instanceof HttpError) {
+    console.error("Could not contact Telegram:", e);
+  } else {
+    console.error("Unknown error:", e);
+  }
+});
 
 export default bot

@@ -1,19 +1,17 @@
-import { ADD_EXPENCE } from '../../scenesConstants';
 import { CustomContext, CustomConversation } from '../../customContextType';
-import { getCategories, createExpence, retrieveDatabase } from '../../../controllers/money';
+import { getCategories, createExpence, isExpence } from '../../../models/money';
 import { loadJsonFileSync } from "load-json-file";
 import { TDatabasesIds } from "../../../types/config";
-import { TExpenceObject } from "../../../types/notion";
 import createInlineKeyboard from '../../../utils/createInlineKeyboard';
 
 const databases: TDatabasesIds = loadJsonFileSync('./settings/databases.json')
 
-const addExpence = async (conversation: CustomConversation, ctx: CustomContext) => {
+const expence = async (conversation: CustomConversation, ctx: CustomContext) => {
 
     if(ctx.message?.text === undefined) return
 
     ctx.expence = {}
-    ctx.expence.amount = parseInt(ctx.message.text)
+    ctx.expence.amount = parseFloat(ctx.message.text)
 
     //request name
     await ctx.reply("Name it, please...")
@@ -22,7 +20,7 @@ const addExpence = async (conversation: CustomConversation, ctx: CustomContext) 
     ctx.expence.name = data.message?.text
     
     //request category
-    const categories = await getCategories(databases.categories)
+    const categories = await conversation.external(() => getCategories(databases.categories))
     let kb = createInlineKeyboard(categories, 2)
 
     await ctx.reply('Choose category', {
@@ -33,11 +31,10 @@ const addExpence = async (conversation: CustomConversation, ctx: CustomContext) 
 
     data = await conversation.wait()
     ctx.expence.categoryID = data.callbackQuery?.data
-    console.log(ctx.expence);
     
     //request account
 
-    const accounts = await getCategories(databases.accounts)
+    const accounts = await conversation.external(() => getCategories(databases.accounts))
     kb = createInlineKeyboard(accounts, 2)
     await ctx.reply('Choose account', {
         reply_markup: {
@@ -51,9 +48,15 @@ const addExpence = async (conversation: CustomConversation, ctx: CustomContext) 
     //add expence to notion
     console.log(ctx.expence);
     
-    await createExpence(ctx.expence as TExpenceObject, databases.expences) //type protection?
+    await conversation.external(() => {
+        if(isExpence(ctx.expence)){
+            createExpence(ctx.expence, databases.expences)
+        }else{
+            throw new TypeError("ctx.expence comply with TExpence type")
+        }
+    }) //type protection?
     await ctx.reply('Succefully added')
     return
 }
  
-export { addExpence }
+export { expence }

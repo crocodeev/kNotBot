@@ -1,6 +1,13 @@
 Bot for integration with Notion
 
-- [ ] add error handler
-- [ ] make inline eyboard creator more efficient
-- [ ] manage inlineMarkupButtons
+- [x] add error handler
+- [ ] make inline keyboard creator more efficient
+- [x] manage inlineMarkupButtons
 - [ ] customize callback query
+- [x] add type guard
+ 
+---
+
+- [ ] add income
+- [ ] add switch between income || expence || transfer
+- [ ] add standart keyboard
