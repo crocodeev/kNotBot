@@ -24,7 +24,7 @@ jobs:
       - name: Build and Push Docker Image
         uses: manusa/actions-publish-docker@v1.1.2
         with:
-          name: ${{ secrets.DOCKERHUB_USERNAME }}/sweetmemory
+          name: ${{ secrets.DOCKERHUB_USERNAME }}/knotbot
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           tags: latest
