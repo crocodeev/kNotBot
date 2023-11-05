@@ -11,3 +11,15 @@ export type TExpenceObject = {
     categoryID: string,
     accountID: string
 }
+
+export type TIncomeObject = {
+    amount: number,
+    name: string,
+    accountID: string
+}
+
+export type TTransferObject = {
+    amount: number,
+    fromAccountID: string,
+    toAccountID: string
+}

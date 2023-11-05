@@ -1,7 +1,11 @@
-import { TExpenceObject } from './../types/notion';
+import { TDatabasesIds } from './../types/config';
+import { TExpenceObject, TIncomeObject, TCategory } from './../types/notion';
 import { text } from "telegraf/typings/button";
 import notion from "../notion/notion"
-import { TCategory, TExpenceObject } from "../types/notion";
+import { loadJsonFileSync } from 'load-json-file';
+
+
+const databases: TDatabasesIds = loadJsonFileSync('./settings/databases.json')
 
 /**
  * get expence categories or account
@@ -36,12 +40,12 @@ const retrieveDatabase = async (databaseID: string) => {
     })
 }
 
-const createExpence = async (expenceObject: TExpenceObject, databaseId: string): Promise<void> => {
+const createExpence = async (expenceObject: TExpenceObject): Promise<void> => {
     
         await notion.pages.create({
 
             parent: {
-                database_id: databaseId
+                database_id: databases.expences
             },
             properties: {
                 Name: {
@@ -74,8 +78,35 @@ const createExpence = async (expenceObject: TExpenceObject, databaseId: string):
         })
 }
 
-const createIncome = async (incomeObject, databaseId): Promise<void> => {
+const createIncome = async (incomeObject: TIncomeObject): Promise<void> => {
     
+    await notion.pages.create({
+
+        parent: {
+            database_id: databases.incomes
+        },
+        properties: {
+            Name: {
+                title: [
+                  {
+                    text: {
+                      content: incomeObject.name
+                    },
+                  },
+                ],
+              },
+            Amount: {
+                number: incomeObject.amount
+            },
+            Account: {
+                relation: [
+                    {
+                        id: incomeObject.accountID
+                    }
+                ]
+            }
+        }
+    })
 }
 
 function isExpence (expence: Partial<TExpenceObject> ): expence is TExpenceObject {
@@ -88,6 +119,18 @@ function isExpence (expence: Partial<TExpenceObject> ): expence is TExpenceObjec
     }
 
     return true
+}
+
+function isIncome (income: Partial<TExpenceObject> ): income is TIncomeObject {
+
+    const keys = ['amount', 'name', 'accountID']
+
+    for (let i = 0; i < keys.length; i++) {
+        
+        if(income[keys[i]] === undefined) return false
+    }
+
+    return true
 } 
 
-export { getCategories, createExpence, retrieveDatabase, isExpence }
+export { getCategories, createExpence, retrieveDatabase, isExpence, createIncome, isIncome }

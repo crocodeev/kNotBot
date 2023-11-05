@@ -50,7 +50,7 @@ const expence = async (conversation: CustomConversation, ctx: CustomContext) => 
     
     await conversation.external(() => {
         if(isExpence(ctx.expence)){
-            createExpence(ctx.expence, databases.expences)
+            createExpence(ctx.expence)
         }else{
             throw new TypeError("ctx.expence comply with TExpence type")
         }

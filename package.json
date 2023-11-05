@@ -6,7 +6,8 @@
   "scripts": {
     "dev:build": "node ./esbuild/server.dev-config.js",
     "dev:watch": "nodemon ./build/index.js",
-    "develop": "npm-run-all --parallel dev:*"
+    "develop": "npm-run-all --parallel dev:*",
+    "prod:build": "node ./esbuild/server.prod-config"
   },
   "keywords": [
     "notion",

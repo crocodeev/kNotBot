@@ -15,6 +15,11 @@ const turtle2: TPet = {
     class: "turtle"
 }
 
+function isTurtle(pet: TPet): pet is TPet {
+    
+    const keys = []
+}
+
 function printData(pet: TPet) {
     
     for (const key in pet) {
@@ -24,4 +29,5 @@ function printData(pet: TPet) {
 
 }
 
-printData(turt)
+printData(turtle1)
+printData(turtle2)

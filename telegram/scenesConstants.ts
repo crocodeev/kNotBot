@@ -1,1 +1,4 @@
-export const ADD_EXPENCE: string = "ADD_EXPENCE"
+export const EXPENCE: string = "EXPENCE"
+export const INCOME: string = "INCOME"
+export const TRANSFER: string = "TRANSFER"
+export const COMMON: string = "COMMON"

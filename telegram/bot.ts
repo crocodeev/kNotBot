@@ -7,7 +7,14 @@ import {
   } from "@grammyjs/conversations";
 import { CustomContext } from './customContextType';
 import { expence } from './controllers/money/expence';
-import { ADD_EXPENCE } from './scenesConstants';
+import { income } from './controllers/money/income';
+import { common } from './controllers/money/common';
+import { EXPENCE,
+        INCOME,
+        TRANSFER,
+        COMMON } from './scenesConstants';
+
+
 
 
 config({
@@ -30,12 +37,15 @@ bot.use(session({
 
 bot.use(conversations())
 
-bot.use(createConversation(expence, ADD_EXPENCE))
+bot.use(createConversation(common, COMMON))
+bot.use(createConversation(expence, EXPENCE))
+bot.use(createConversation(income, INCOME))
 
 bot.hears(/^[+-]?\d+(\.\d+)?$/, async (ctx) => {
     
-    await ctx.conversation.enter(ADD_EXPENCE)
+    await ctx.conversation.enter(COMMON);
 })
+
 
 bot.catch((err) => {
   const ctx = err.ctx;

@@ -1,4 +1,4 @@
-import { TExpenceObject } from "../types/notion";
+import { TExpenceObject, TIncomeObject, TTransferObject } from "../types/notion";
 import { Context } from 'grammy';
 import { type Conversation,
          type ConversationFlavor,
@@ -6,6 +6,8 @@ import { type Conversation,
 
 interface ExtendedContext extends Context {
     expence: Partial<TExpenceObject>
+    income: Partial<TIncomeObject>
+    transfer: Partial<TTransferObject>
 }
 
 export type CustomContext = ConversationFlavor<ExtendedContext>;
