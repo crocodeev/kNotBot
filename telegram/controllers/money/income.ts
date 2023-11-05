@@ -34,7 +34,6 @@ const income = async (conversation: CustomConversation, ctx: CustomContext) => {
     ctx.income.accountID = data.callbackQuery?.data
     
     //add income to notion
-    console.log(ctx.income);
     
     await conversation.external(() => {
         if(isIncome(ctx.income)){

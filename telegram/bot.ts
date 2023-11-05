@@ -11,7 +11,6 @@ import { income } from './controllers/money/income';
 import { common } from './controllers/money/common';
 import { EXPENCE,
         INCOME,
-        TRANSFER,
         COMMON } from './scenesConstants';
 
 
@@ -25,6 +24,8 @@ if(!process.env.TELEGRAM_TOKEN){
     console.log("TOKEN NOT PROVIDED");
     process.exit(-1)
 }
+
+
 
 const bot = new Bot<CustomContext>(process.env.TELEGRAM_TOKEN)
 
@@ -41,11 +42,12 @@ bot.use(createConversation(common, COMMON))
 bot.use(createConversation(expence, EXPENCE))
 bot.use(createConversation(income, INCOME))
 
+
 bot.hears(/^[+-]?\d+(\.\d+)?$/, async (ctx) => {
+    console.log("Hello");
     
     await ctx.conversation.enter(COMMON);
 })
-
 
 bot.catch((err) => {
   const ctx = err.ctx;

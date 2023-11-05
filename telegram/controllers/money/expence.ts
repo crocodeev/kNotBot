@@ -45,8 +45,7 @@ const expence = async (conversation: CustomConversation, ctx: CustomContext) => 
     data = await conversation.wait()
     ctx.expence.accountID = data.callbackQuery?.data
     
-    //add expence to notion
-    console.log(ctx.expence);
+    //add expence to notion 
     
     await conversation.external(() => {
         if(isExpence(ctx.expence)){
